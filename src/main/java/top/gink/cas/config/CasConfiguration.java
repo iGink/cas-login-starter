@@ -28,8 +28,8 @@ public class CasConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public CasAuthInterceptor casAuthInterceptor(UserLoginService userLoginService) {
-        return new CasAuthInterceptor(userLoginService);
+    public CasAuthInterceptor casAuthInterceptor(UserLoginService userLoginService, CasProperties casProperties) {
+        return new CasAuthInterceptor(userLoginService, casProperties);
     }
 
     @Bean

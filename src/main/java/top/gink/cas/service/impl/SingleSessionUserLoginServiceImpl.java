@@ -15,17 +15,14 @@ import static top.gink.cas.constant.Constant.AUTH_USER_NAME;
  */
 public class SingleSessionUserLoginServiceImpl implements UserLoginService {
     @Override
-    public boolean isLoginState(HttpServletRequest request) {
+    public boolean needLogin(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute(AUTH_USER_NAME);
         if (attribute == null) {
-            return false;
+            return true;
         }
         String userName = attribute.toString();
-        if (StringUtils.isBlank(userName)) {
-            return false;
-        }
-        return true;
+        return StringUtils.isBlank(userName);
     }
 
     @Override

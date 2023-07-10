@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * @create 2023/7/10 14:46
  */
 public interface UserLoginService {
-    boolean isLoginState(HttpServletRequest request);
+    boolean needLogin(HttpServletRequest request);
 
     void clearUserInfo(HttpServletRequest request);
 
