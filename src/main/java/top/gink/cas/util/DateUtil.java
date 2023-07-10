@@ -1,22 +1,16 @@
 package top.gink.cas.util;
 
-import com.megvii.auth.exception.ServiceException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 public class DateUtil {
 
@@ -144,7 +138,7 @@ public class DateUtil {
             }
             return DateUtils.parseDate(str, dateFormats);
         } catch (ParseException e) {
-            throw new ServiceException(String.format("转换失败，输入的值：%s不是日期类型", str), e);
+            throw new RuntimeException(String.format("转换失败，输入的值：%s不是日期类型", str), e);
         }
     }
 

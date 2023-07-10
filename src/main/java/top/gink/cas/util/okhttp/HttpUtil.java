@@ -1,27 +1,18 @@
 package top.gink.cas.util.okhttp;
 
-import com.ejlchina.okhttps.AHttpTask;
-import com.ejlchina.okhttps.HTTP;
-import com.ejlchina.okhttps.SHttpTask;
-import com.ejlchina.okhttps.TaskExecutor;
-import com.ejlchina.okhttps.WHttpTask;
+import com.ejlchina.okhttps.*;
 import com.google.gson.Gson;
-import com.megvii.auth.config.GsonConfig;
-
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-import java.util.concurrent.TimeUnit;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import lombok.SneakyThrows;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
+import top.gink.cas.util.gson.GsonConfig;
+
+import javax.net.ssl.*;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
 
 /**
  * OkHttps 工具类,放弃SPI的配置方式，SPI打包后不可用问题无法解决
