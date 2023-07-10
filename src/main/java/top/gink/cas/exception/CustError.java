@@ -24,6 +24,6 @@ public enum CustError {
                 return val;
             }
         }
-        throw new ServiceException("未知的code");
+        throw new RuntimeException("未知的code");
     }
 }

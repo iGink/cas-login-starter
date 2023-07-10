@@ -1,0 +1,7 @@
+cas:
+  enable: true
+  base_url: _
+  service_validate: ${cas.base_url}/cas/serviceValidate
+  login: ${cas.base_url}/cas/login?service=${cas.callback_url}
+  logout: ${cas.base_url}/cas/logout?service=${cas.callback_url}
+  callback_url: http://localhost:${server.port}/cas/callback

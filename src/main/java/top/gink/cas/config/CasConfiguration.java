@@ -2,10 +2,14 @@ package top.gink.cas.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import top.gink.cas.interceptor.CasAuthInterceptor;
+import top.gink.cas.model.CasProperties;
+import top.gink.cas.service.CasReqService;
 import top.gink.cas.service.UserLoginService;
+import top.gink.cas.service.impl.SimpleCasReqServiceImpl;
 import top.gink.cas.service.impl.SingleSessionUserLoginServiceImpl;
 
 /**
@@ -14,6 +18,7 @@ import top.gink.cas.service.impl.SingleSessionUserLoginServiceImpl;
  */
 @EnableConfigurationProperties(CasProperties.class)
 @Configurable
+@ConditionalOnProperty(prefix = "cas", name = "enable", value = "true", matchIfMissing = true)
 public class CasConfiguration {
     @Bean
     @ConditionalOnMissingBean
@@ -26,5 +31,21 @@ public class CasConfiguration {
     public CasAuthInterceptor casAuthInterceptor(UserLoginService userLoginService) {
         return new CasAuthInterceptor(userLoginService);
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CasReqService casReqService(CasProperties casProperties) {
+        return new SimpleCasReqServiceImpl(casProperties);
+    }
+
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public CasIgnorePath casIgnorePath() {
+//        return new CasIgnorePath(Arrays.asList(
+//                "/static/**",
+//                "/favicon.ico"
+//        ));
+//    }
+
 
 }

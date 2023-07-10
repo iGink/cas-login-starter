@@ -1,6 +1,7 @@
 package top.gink.cas.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
+import top.gink.cas.model.CasResp;
 import top.gink.cas.service.UserLoginService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import static top.gink.cas.constant.Constant.AUTH_USER_NAME;
  */
 public class SingleSessionUserLoginServiceImpl implements UserLoginService {
     @Override
-    public boolean checkLoginState(HttpServletRequest request) {
+    public boolean isLoginState(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute(AUTH_USER_NAME);
         if (attribute == null) {
@@ -25,5 +26,18 @@ public class SingleSessionUserLoginServiceImpl implements UserLoginService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void clearUserInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(AUTH_USER_NAME);
+    }
+
+    @Override
+    public void setUserInfo(HttpServletRequest request, String ticket, CasResp casResp) {
+        HttpSession session = request.getSession();
+        String userName = casResp.serviceResponse.authenticationSuccess.user;
+        session.setAttribute(AUTH_USER_NAME, userName);
     }
 }
