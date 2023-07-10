@@ -18,7 +18,7 @@ import top.gink.cas.service.impl.SingleSessionUserLoginServiceImpl;
  */
 @EnableConfigurationProperties(CasProperties.class)
 @Configurable
-@ConditionalOnProperty(prefix = "cas", name = "enable", value = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
 public class CasConfiguration {
     @Bean
     @ConditionalOnMissingBean

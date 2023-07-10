@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping({"/cas/"})
-@ConditionalOnProperty(prefix = "cas", name = "enable", value = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
 public class CasController {
     private final CasProperties casProperties;
     private final CasReqService casReqService;

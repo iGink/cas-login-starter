@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import top.gink.cas.interceptor.CasAuthInterceptor;
 import top.gink.cas.model.CasProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Gink
@@ -15,7 +19,7 @@ import top.gink.cas.model.CasProperties;
  */
 @Configurable
 @AutoConfigureAfter(WebMvcConfigurationSupport.class)
-@ConditionalOnProperty(prefix = "cas", name = "enable", value = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
 public class CasMvcConfiguration extends WebMvcConfigurationSupport {
     @Autowired
     private CasAuthInterceptor casAuthInterceptor;
@@ -24,9 +28,17 @@ public class CasMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        List<String> ignorePath = getIgnorePath();
         registry.addInterceptor(casAuthInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns(casProperties.ignorePath);
+                .excludePathPatterns(ignorePath);
         super.addInterceptors(registry);
+    }
+
+    private List<String> getIgnorePath() {
+        if (CollectionUtils.isEmpty(casProperties.ignorePath)) {
+            return new ArrayList<>();
+        }
+        return casProperties.ignorePath;
     }
 }

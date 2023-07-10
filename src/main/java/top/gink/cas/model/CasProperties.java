@@ -14,6 +14,7 @@ public class CasProperties {
     public String loginSuccessUrl;
 
     public String baseUrl;
+    public String serverUrl;
     public String serviceValidateUrl;
     public String loginUrl;
     public String logoutUrl;
