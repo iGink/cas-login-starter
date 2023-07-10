@@ -16,12 +16,12 @@
 package top.gink.cas.util.okhttp;
 
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okhttp3.internal.http.HttpHeaders;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.GzipSource;
-import top.gink.cas.log.WebLog;
 import top.gink.cas.util.gson.GsonConfig;
 
 import java.io.EOFException;
@@ -41,6 +41,7 @@ import java.util.concurrent.TimeUnit;
  * created by this class should not be considered stable and may change slightly between releases.
  * If you need a stable logging format, use your own interceptor.
  */
+@Slf4j
 public final class HttpLoggingInterceptor implements Interceptor {
 
     private static final Charset UTF8 = StandardCharsets.UTF_8;
@@ -95,14 +96,14 @@ public final class HttpLoggingInterceptor implements Interceptor {
 
         Map<String, Object> reqMap = getReqMap(request, connection, uuid);
 
-        WebLog.httpLog.info("req: " + gson.toJson(reqMap));
+        log.info("req: {}", gson.toJson(reqMap));
 
         long startNs = System.nanoTime();
         Response response;
         try {
             response = chain.proceed(request);
         } catch (Exception e) {
-            WebLog.errorLog.error(gson.toJson(reqMap), e);
+            log.error(gson.toJson(reqMap), e);
             throw e;
         }
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
@@ -150,7 +151,7 @@ public final class HttpLoggingInterceptor implements Interceptor {
         respMap.put("gzippedLength", gzippedLength);
         respMap.put("uuid", uuid);
 
-        WebLog.httpLog.info("resp: " + gson.toJson(respMap));
+        log.info("resp: {}", gson.toJson(respMap));
 
         return response;
     }
