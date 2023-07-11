@@ -2,7 +2,7 @@ package top.gink.cas.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import top.gink.cas.anno.IgnoreCasLogin;
@@ -35,8 +35,9 @@ public class CasAuthInterceptor implements HandlerInterceptor {
         }
         HandlerMethod hm = (HandlerMethod) handler;
         //是否有忽略的注解
-        IgnoreCasLogin ignoreCasLogin = AnnotationUtils.findAnnotation(hm.getMethod(), IgnoreCasLogin.class);
-        if (ignoreCasLogin != null) {
+        IgnoreCasLogin i1 = AnnotationUtils.findAnnotation(hm.getMethod(), IgnoreCasLogin.class);
+        IgnoreCasLogin i2 = AnnotationUtils.findAnnotation(hm.getBeanType(), IgnoreCasLogin.class);
+        if (i1 != null || i2 != null) {
             log.trace("cas login,url:{},ignore IgnoreCasLogin", request.getRequestURI());
             return true;
         }
@@ -57,8 +58,9 @@ public class CasAuthInterceptor implements HandlerInterceptor {
      * @throws IOException
      */
     private boolean doLogin(HttpServletResponse response, HandlerMethod hm) throws IOException {
-        RequestBody requestBody = AnnotationUtils.findAnnotation(hm.getMethod(), RequestBody.class);
-        if (requestBody != null) {
+        ResponseBody requestBody = AnnotationUtils.findAnnotation(hm.getMethod(), ResponseBody.class);
+        ResponseBody restController = AnnotationUtils.findAnnotation(hm.getBeanType(), ResponseBody.class);
+        if (requestBody != null || restController != null) {
             response.sendRedirect(casProperties.loginUrl);
             return false;
         } else {

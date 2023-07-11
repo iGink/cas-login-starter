@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 开启后会跳过cas校验
  */
-@Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IgnoreCasLogin {
 }

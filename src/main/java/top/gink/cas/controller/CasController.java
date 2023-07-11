@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import top.gink.cas.anno.IgnoreCasLogin;
 import top.gink.cas.model.CasProperties;
 import top.gink.cas.model.CasResp;
 import top.gink.cas.service.CasReqService;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Gink
  * @create 2022/11/11 13:42
  */
+@IgnoreCasLogin
 @Controller
 @RequestMapping({"/cas/"})
 @ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)

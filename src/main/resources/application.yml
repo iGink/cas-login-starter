@@ -1,5 +1,6 @@
 cas:
   enabled: true
+  login_success_url: /
   base_url: _
   server_url: http://localhost:8080
   service_validate_url: ${cas.base_url}/cas/serviceValidate
@@ -9,3 +10,4 @@ cas:
   ignore_path:
     - /static/**
     - /favicon.ico
+    - /error
