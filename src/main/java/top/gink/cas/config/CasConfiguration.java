@@ -38,14 +38,4 @@ public class CasConfiguration {
         return new SimpleCasReqServiceImpl(casProperties);
     }
 
-//    @Bean
-//    @ConditionalOnMissingBean
-//    public CasIgnorePath casIgnorePath() {
-//        return new CasIgnorePath(Arrays.asList(
-//                "/static/**",
-//                "/favicon.ico"
-//        ));
-//    }
-
-
 }

@@ -15,7 +15,7 @@ CAS登录框架，使springboot项目可以简单接入cas登录
 <dependency>
     <groupId>top.gink</groupId>
     <artifactId>cas-login-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 2. 在项目中使用@EnableCasLogin注解启用cas登录

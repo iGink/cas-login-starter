@@ -11,7 +11,7 @@
 
     <groupId>top.gink</groupId>
     <artifactId>cas-login-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <name>cas-login-springboot-starter</name>
     <description>sdk for cas login/logout</description>
@@ -26,7 +26,6 @@
     <developers>
         <developer>
             <name>Gink</name>
-            <email>gink2618@163.com</email>
             <organization>gink.top</organization>
             <organizationUrl>https://www.gink.top</organizationUrl>
         </developer>
@@ -55,12 +54,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>31.1-jre</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
