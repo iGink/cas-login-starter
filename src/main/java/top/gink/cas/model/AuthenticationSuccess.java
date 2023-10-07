@@ -1,11 +1,14 @@
 package top.gink.cas.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class AuthenticationSuccess {
 
     public String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

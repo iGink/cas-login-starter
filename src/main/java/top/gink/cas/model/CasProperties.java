@@ -1,13 +1,9 @@
 package top.gink.cas.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
-@Setter
-@Getter
 @ConfigurationProperties(prefix = "cas")
 public class CasProperties {
     /**
@@ -48,4 +44,76 @@ public class CasProperties {
      */
     public List<String> ignorePath;
 
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getLoginSuccessUrl() {
+        return loginSuccessUrl;
+    }
+
+    public void setLoginSuccessUrl(String loginSuccessUrl) {
+        this.loginSuccessUrl = loginSuccessUrl;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public String getServiceValidateUrl() {
+        return serviceValidateUrl;
+    }
+
+    public void setServiceValidateUrl(String serviceValidateUrl) {
+        this.serviceValidateUrl = serviceValidateUrl;
+    }
+
+    public String getLoginUrl() {
+        return loginUrl;
+    }
+
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
+
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
+
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
+
+    public String getCallbackUrl() {
+        return callbackUrl;
+    }
+
+    public void setCallbackUrl(String callbackUrl) {
+        this.callbackUrl = callbackUrl;
+    }
+
+    public List<String> getIgnorePath() {
+        return ignorePath;
+    }
+
+    public void setIgnorePath(List<String> ignorePath) {
+        this.ignorePath = ignorePath;
+    }
 }

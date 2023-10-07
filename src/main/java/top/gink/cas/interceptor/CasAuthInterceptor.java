@@ -1,6 +1,7 @@
 package top.gink.cas.interceptor;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Slf4j
 public class CasAuthInterceptor implements HandlerInterceptor {
     private final UserLoginService userLoginService;
     private final CasProperties casProperties;
+    private static final Logger log = LoggerFactory.getLogger(CasAuthInterceptor.class);
 
     public CasAuthInterceptor(UserLoginService userLoginService, CasProperties casProperties) {
         this.userLoginService = userLoginService;
@@ -29,6 +30,7 @@ public class CasAuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws IOException {
         log.trace("start cas login,url:{}", request.getRequestURI());
+        //判断是否是HandlerMethod
         if (!(handler instanceof HandlerMethod)) {
             log.trace("cas login,url:{},not HandlerMethod", request.getRequestURI());
             return true;
@@ -41,6 +43,7 @@ public class CasAuthInterceptor implements HandlerInterceptor {
             log.trace("cas login,url:{},ignore IgnoreCasLogin", request.getRequestURI());
             return true;
         }
+        //判断是否需要登录
         if (userLoginService.needLogin(request)) {
             return doLogin(response, hm);
         }
@@ -48,21 +51,15 @@ public class CasAuthInterceptor implements HandlerInterceptor {
     }
 
     /*------------------------------------------内部方法--------------------------------------------*/
-
-    /**
-     * 尝试登录
-     *
-     * @param response
-     * @param hm
-     * @return
-     * @throws IOException
-     */
     private boolean doLogin(HttpServletResponse response, HandlerMethod hm) throws IOException {
+        // Check if the request body or the controller has the ResponseBody annotation
         ResponseBody requestBody = AnnotationUtils.findAnnotation(hm.getMethod(), ResponseBody.class);
         ResponseBody restController = AnnotationUtils.findAnnotation(hm.getBeanType(), ResponseBody.class);
+        // If either of them has the ResponseBody annotation, redirect to the login page
         if (requestBody != null || restController != null) {
             response.sendRedirect(casProperties.loginUrl);
             return false;
+            // Otherwise, throw an AuthException
         } else {
             throw new AuthException(CustError.NEED_LOGIN);
         }
