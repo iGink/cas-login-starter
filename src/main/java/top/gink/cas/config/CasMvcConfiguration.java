@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import top.gink.cas.interceptor.CasAuthInterceptor;
 import top.gink.cas.model.CasProperties;
 
@@ -20,7 +21,7 @@ import java.util.List;
 @Configurable
 @AutoConfigureAfter(WebMvcConfigurationSupport.class)
 @ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
-public class CasMvcConfiguration extends WebMvcConfigurationSupport {
+public class CasMvcConfiguration implements WebMvcConfigurer {
     @Autowired
     private CasAuthInterceptor casAuthInterceptor;
     @Autowired
@@ -32,7 +33,6 @@ public class CasMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(casAuthInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(ignorePath);
-        super.addInterceptors(registry);
     }
 
     private List<String> getIgnorePath() {
