@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Configurable
 @AutoConfigureAfter(WebMvcConfigurationSupport.class)
-@ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "cas", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CasMvcConfiguration implements WebMvcConfigurer {
     @Autowired
     private CasAuthInterceptor casAuthInterceptor;

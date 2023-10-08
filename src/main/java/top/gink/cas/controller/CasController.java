@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 @IgnoreCasLogin
 @Controller
 @RequestMapping({"/cas/"})
-@ConditionalOnProperty(prefix = "cas", name = "enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "cas", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CasController {
     private final CasProperties casProperties;
     private final CasReqService casReqService;
