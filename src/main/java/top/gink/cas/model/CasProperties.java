@@ -9,7 +9,7 @@ public class CasProperties {
     /**
      * 是否启用
      */
-    public boolean enabled;
+    public Boolean enabled;
     /**
      * 登陆成功地址
      */
@@ -20,9 +20,9 @@ public class CasProperties {
      */
     public String baseUrl;
     /**
-     * 服务端url
+     * 回调url
      */
-    public String serverUrl;
+    public String callbackUrl;
     /**
      * 服务端验证url
      */
@@ -35,15 +35,11 @@ public class CasProperties {
      * 登出url
      */
     public String logoutUrl;
-    /**
-     * 回调url
-     */
-    public String callbackUrl;
+
     /**
      * 忽略路径
      */
     public List<String> ignorePath;
-
 
     public boolean isEnabled() {
         return enabled;
@@ -67,14 +63,6 @@ public class CasProperties {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public String getServerUrl() {
-        return serverUrl;
-    }
-
-    public void setServerUrl(String serverUrl) {
-        this.serverUrl = serverUrl;
     }
 
     public String getServiceValidateUrl() {

@@ -1,6 +1,6 @@
 cas:
   enabled: true
-  login_success_url: /
+  login_success_url: /sdfsfdsfsfsfrdsf
   base_url: _
   server_url: http://localhost:8080
   service_validate_url: ${cas.base_url}/cas/serviceValidate

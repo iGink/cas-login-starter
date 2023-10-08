@@ -11,7 +11,7 @@
 
     <groupId>top.gink</groupId>
     <artifactId>cas-login-starter</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
     <name>cas-login-springboot-starter</name>
     <description>sdk for cas login/logout</description>

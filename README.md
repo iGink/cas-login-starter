@@ -15,7 +15,7 @@ CAS登录框架，使springboot项目可以简单接入cas登录
 <dependency>
     <groupId>top.gink</groupId>
     <artifactId>cas-login-starter</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 2. 在项目中使用@EnableCasLogin注解启用cas登录
@@ -34,6 +34,17 @@ public class App {
 3. 在application.proerties中配置host地址
 
 ```
-cas.base_url=https://aa.aa.aa
+cas.enabled=true
+cas.login_success_url=/
+cas.base_url=_
+cas.server_url=http://localhost:8080
+cas.service_validate_url=${cas.base_url}/cas/serviceValidate
+cas.login_url=${cas.base_url}/cas/login?service=${cas.callback_url}
+cas.logout_url=${cas.base_url}/cas/logout?service=${cas.callback_url}
+cas.callback_url=${cas.server_url}/cas/callback
+cas.ignore_path[0]=/static/**
+cas.ignore_path[1]=/favicon.ico
+cas.ignore_path[2]=/error
+
 ```
 4. 完成
