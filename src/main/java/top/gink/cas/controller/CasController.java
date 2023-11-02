@@ -3,7 +3,9 @@ package top.gink.cas.controller;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import top.gink.cas.anno.IgnoreCasLogin;
@@ -46,6 +48,17 @@ public class CasController {
         RedirectView rdv = new RedirectView(casProperties.loginSuccessUrl);
         rdv.setExposeModelAttributes(false);
         return new ModelAndView(rdv);
+    }
+
+    /**
+     * 暂不支持单点登出
+     *
+     * @return
+     */
+    @PostMapping("callback")
+    @ResponseBody
+    public String logout() {
+        return "ok";
     }
 
     @RequestMapping({"logout"})
